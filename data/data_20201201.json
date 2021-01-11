@@ -1,0 +1,24 @@
+{
+  "nodes": [
+    {"id": "Slice", "group": 1},
+    {"id": "Farm to Fork", "group": 1},
+    {"id": "Micro Factory", "group": 1},
+    {"id": "Human Flourishing", "group": 1},
+    {"id": "SHEA", "group": 1},
+    {"id": "Movable", "group": 1},
+    {"id": "Structure ", "group": 1},
+    {"id": "Humans", "group": 1}
+
+  ],
+  "links": [
+    {"source": "Farm to Fork", "target": "Slice", "value": 1},
+    {"source": "Micro Factory", "target": "Slice", "value": 8},
+    {"source": "Human Flourishing", "target": "Slice", "value": 10},
+    {"source": "Human Flourishing", "target": "Micro Factory", "value": 6},
+    {"source": "SHEA", "target": "Slice", "value": 1},
+    {"source": "Movable", "target": "Slice", "value": 1},
+    {"source": "Structure ", "target": "Slice", "value": 1},
+    {"source": "Humans", "target": "Slice", "value": 1}
+
+  ]
+}

@@ -1,13 +1,13 @@
 {
   "nodes": [
-    {"id": "Slice", "group": 1},
-    {"id": "Farm to Fork", "group": 1},
-    {"id": "Micro Factory", "group": 1},
-    {"id": "Human Flourishing", "group": 1},
-    {"id": "SHEA", "group": 1},
-    {"id": "Movable", "group": 1},
-    {"id": "Structure ", "group": 1},
-    {"id": "Humans", "group": 1}
+    {"id": "Slice", "group": 1, "url":"www.google.com"},
+    {"id": "Farm to Fork", "group": 1,"url":"www.google.com"},
+    {"id": "Micro Factory", "group": 1,"url":"www.google.com"},
+    {"id": "Human Flourishing", "group": 1,"url":"www.google.com"},
+    {"id": "SHEA", "group": 1,"url":"www.google.com"},
+    {"id": "Movable", "group": 1,"url":"www.google.com"},
+    {"id": "Structure ", "group": 1,"url":"www.google.com"},
+    {"id": "Humans", "group": 1,"url":"www.google.com"}
 
   ],
   "links": [

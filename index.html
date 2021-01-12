@@ -16,30 +16,135 @@
   <!-- Favicons (just the basics for now, check out http://realfavicongenerator.net/ for all available) -->
   <link rel="shortcut icon" href="assets/img/favicon.png">
   <link rel="icon" type="image/png" href="assets/img/favicon.png" sizes="32x32">
-          <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <!-- Web fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:200,300,400,600,700&Open+Sans:300,400,600,700">
+
+  <!-- Bootstrap and Ares CSS -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/animate.min.css">
+  <link rel="stylesheet" href="assets/css/ares.css">
+
+  <!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
   <script src="https://unpkg.com/3d-force-graph"></script>
-          <script src="assets/js/core/jquery.min.js"></script>
+  <!-- Scripts -->
+  <script src="assets/js/core/jquery.min.js"></script>
+  <script src="assets/js/plugins/jquery.appear.min.js"></script>
+  <script src="assets/js/plugins/jquery.countTo.min.js"></script>
+  <script src="assets/js/plugins/jquery.easypiechart.min.js"></script>
+  <script src="assets/js/ares.js"></script>
   <!--<script src="../../dist/3d-force-graph.js"></script>-->
 
   <style>
   .fullscreen {
-  position: fixed;
+  /* position: fixed; */
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  overflow: auto;
+   overflow: auto;
   background: black; /* Just to visualize the extent */
+}
+
+.preview_window {
+/* position: fixed; */
+top: 20%;
+left: 5%;
+bottom: 20%;
+right: 80%;
+ overflow:hidden;
+/* background: lime;  */
+border:none;
+}
+
+.class_preview_frame {
+  -ms-transform:scale(0.60);
+-moz-transform:scale(0.60);
+-o-transform: scale(0.60);
+-webkit-transform: scale(0.60);
+transform:scale(0.60);
+border:1px solid black;
+}
+
+.toolbar {
+  top: 5%;
+  /* left: 80%; */
+  /* bottom: 80%; */
+  right: 5%;
+  /* height:36px; */
+   overflow:hidden;
+  /* background: black; */
+  /* opacity:50%; */
+  border:none;
+}
+
+.right_panel {
+  top: 0%;
+  /* left: 80%; */
+  /* bottom: 80%; */
+  right: 0%;
+   height:100%;
+  width:20%;
+   overflow:hidden;
+background: gray;
+   /* opacity:50%; */
+  border:none;
 }
  </style>
 </head>
 
 <body>
 
-  <div class="row fullscreen">
-  <div id="3d-graph" class="fullscreen"></div>
+  <div class="fullscreen" style="z-index: 1; position: absolute;">
+  <div id="3d-graph" ></div>
   </div>
+
+  <!-- <div class = "preview_window" style="z-index: 2; position: absolute;">
+    <iframe id="preview_frame" class="class_preview_frame" style="display:block; width:100%;height:100%;"> </iframe>
+</div> -->
+
+<div class="right_panel" style="z-index: 2; position: absolute;">
+<div class="row justify-content-md-center" style="text-align:center;margin-top:5%;">
+<div class = "toolbar">
+  <button class="btn btn-lg" style="background:black;color:white;" title="Full Screen"><i class="fas fa-expand-arrows-alt"></i></button>
+  <button class="btn btn-lg" style="background:black;color:white;" onclick="centerScreen()" title="Center Screen"><i class="fas fa-compress-arrows-alt"></i></button>
+  <button class="btn btn-lg" style="background:black;color:white;" title="User Settings"><i class="fas fa-user-cog"></i></button>
+  <button class="btn btn-lg" style="background:black;color:white;" title="Sign Out">  <i class="fas fa-sign-out-alt"></i></button>
+
+  <!-- <button class="btn btn-lg" style="background:black;color:white;" onclick="centerScreen()" ><i class="fas fa-compress-arrows-alt"></i></button> -->
+</div>
+</div>
+<hr>
+<div class="row justify-content-md-center" style="text-align:center;color:black;margin-top:5%;">
+  <form>
+  <div class="form-group">
+    <!-- <h3><span class="label label-default" style="text-align:center;color:black;">Search</span></h3> -->
+  <!-- <label for="usr">Search</label> -->
+  <span>
+  <input type="text" class="form-control input-lg" id="usr">
+  <button class="btn" style="background:black;color:white;" title="Search">  <i class="fas fa-search"></i></button>
+</span>
+</div>
+</form>
+</div>
+<hr>
+<div class="row justify-content-md-center" style="text-align:center;color:black;margin-top:5%;">
+      <button class="btn" style="background:black;color:white;" title="Go to Page">  <i class="fas fa-external-link-square-alt"></i></button>
+    <button class="btn" style="background:black;color:white;" title="Bookmark Page">   <i class="fas fa-bookmark"></i></button>
+          <button class="btn" style="background:black;color:white;" title="Print Page"> <i class="fas fa-print"></i></button>
+                <button class="btn" style="background:black;color:white;" title="Copy Page Link">   <i class="fas fa-bookmark"></i></button>
+                <button class="btn" style="background:black;color:white;" title="Share Page Link"> <i class="fas fa-share-square"></i></button>
+
+</div>
+<br>
+<div class="row justify-content-md-center" style="text-align:center;color:black;margin-top:5%;height:300px;display:none;" id="spinner">
+    <img src="assets/img/spinner2.gif" alt="Loading Preview.." title="Loading Preview..">
+</div>
+<!-- <div class="row justify-content-md-center" style="text-align:center;color:black;height:60vh;margin:0;padding:0;border:0;"> -->
+    <iframe id="preview_frame" class="row" style="position:absolute;display:block; width:100%;height:100%;border:0;margin:0;padding:0;" onload="document.getElementById('spinner').style.display='none';"> </iframe>
+    <!-- </div> -->
+</div>
 
   <script>
     // Random tree
@@ -119,10 +224,13 @@
 
        })
        .onNodeRightClick(node => {
-         window.open(
-              node.url,
-              '_blank' // <- This is what makes it open in a new window.
-            );
+document.getElementById("spinner").style.display="block";
+         var frame = document.getElementById("preview_frame");
+         frame.src= node.url;
+         // window.open(
+         //      node.url,
+         //      'preview_frame' // <- This is what makes it open in a new window.
+         //    );
                    })
         .onLinkHover(link => {
           highlightNodes.clear();
@@ -145,8 +253,13 @@
         .linkDirectionalParticles(Graph.linkDirectionalParticles());
     }
 
+Graph.onEngineStop(() => Graph.zoomToFit(400));
+
+function centerScreen() {
     // fit to canvas when engine stops
-// Graph.onEngineStop(() => Graph.zoomToFit(400));
+Graph.onEngineStop(() => Graph.zoomToFit(400));
+}
+
   </script>
 </body>
 </html>

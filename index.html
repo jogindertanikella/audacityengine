@@ -1,12 +1,45 @@
+<!DOCTYPE html>
+
+<!--[if gt IE 9]><!--> <html lang="en"> <!--<![endif]-->
+
 <head>
-  <style> body { margin: 0; } </style>
+
+  <meta charset="utf-8">
+
+  <title>Audacity Engine</title>
+
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
+
+  <!-- Favicons (just the basics for now, check out http://realfavicongenerator.net/ for all available) -->
+  <link rel="shortcut icon" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" sizes="32x32">
+          <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 
   <script src="https://unpkg.com/3d-force-graph"></script>
+          <script src="assets/js/core/jquery.min.js"></script>
   <!--<script src="../../dist/3d-force-graph.js"></script>-->
+
+  <style>
+  .fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+  background: black; /* Just to visualize the extent */
+}
+ </style>
 </head>
 
 <body>
-  <div id="3d-graph"></div>
+
+  <div class="row fullscreen">
+  <div id="3d-graph" class="fullscreen"></div>
+  </div>
 
   <script>
     // Random tree
@@ -116,3 +149,4 @@
 // Graph.onEngineStop(() => Graph.zoomToFit(400));
   </script>
 </body>
+</html>

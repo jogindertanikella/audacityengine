@@ -45,9 +45,12 @@
 
   .jsonUrl('https://betterme.ai/audacitycommons/audacityengine/data/data_20201201.json')
   .nodeLabel('id')
-  .nodeAutoColorBy('group')
 
-        .nodeColor(node => highlightNodes.has(node) ? node === hoverNode ? 'rgb(255,0,0,1)' : 'rgba(255,160,0,0.8)' : 'rgba(0,255,255,0.6)')
+    // .nodeAutoColorBy('color')
+
+//If Node is not highlighted or there is no hover on Node, then default value of node color is taken
+ .nodeColor(node => highlightNodes.has(node) ? node === hoverNode ? 'rgba(255,160,0,0.8)' : 'rgba(255,160,0,0.8)' : node.color)
+    // .nodeColor('color')
         .linkWidth(link => highlightLinks.has(link) ? 4 : 1)
         .linkDirectionalParticles(link => highlightLinks.has(link) ? 4 : 0)
         .linkDirectionalParticleWidth(4)
@@ -110,6 +113,6 @@
     }
 
     // fit to canvas when engine stops
-Graph.onEngineStop(() => Graph.zoomToFit(400));
+// Graph.onEngineStop(() => Graph.zoomToFit(400));
   </script>
 </body>
